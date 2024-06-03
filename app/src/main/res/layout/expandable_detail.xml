@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:id="@+id/episodeTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Name:"
+        android:textColor="@color/dark_white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/episodeName"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pilot"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/episodeAirDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Air date:"
+        android:textColor="@color/dark_white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:paddingTop="4dp" />
+
+    <TextView
+        android:id="@+id/episodeAirDateValue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="December 13, 2013"
+        android:textSize="16sp" />
+
+</LinearLayout>
