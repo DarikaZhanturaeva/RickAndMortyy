@@ -31,6 +31,7 @@ android {
     }
     buildFeatures{
         viewBinding = true
+        buildConfig = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -77,4 +78,13 @@ dependencies {
 
     //Coil
     implementation ("io.coil-kt:coil:2.4.0")
+
+    //Glide
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
+
+    //paging
+    val paging_version = "3.3.0"
+    implementation("androidx.paging:paging-runtime:$paging_version")
+    testImplementation("androidx.paging:paging-common:$paging_version")
 }

@@ -2,61 +2,69 @@ package com.geeks.rickandmortyy.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import coil.load
 import com.geeks.rickandmortyy.data.model.Character
-import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import coil.transform.CircleCropTransformation
+import com.bumptech.glide.Glide
+import androidx.paging.PagedListAdapter
+import coil.load
+import com.geeks.rickandmortyy.R
 import com.geeks.rickandmortyy.databinding.ItemCharacterBinding
 
-class CharacterAdapter() : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
-
-    private var binding: ItemCharacterBinding? = null
-
-    inner class CharacterViewHolder(ItemBinding: ItemCharacterBinding) : RecyclerView.ViewHolder(
-        ItemBinding.root
-    )
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        binding = ItemCharacterBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CharacterViewHolder(binding!!)
-    }
-
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return position
-    }
-
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
-        val character = differ.currentList[position]
-        holder.itemView.apply {
-            binding?.characterName?.text = character.name
-            binding?.characterLocation?.text = character.location.name
-            binding?.characterFirstSeen?.text = character.origin.name
-            binding?.let {
-                binding?.imgCharacter?.let { imgCharacter ->
-                    imgCharacter.load(character.image) {
-                        crossfade(true)
-                        transformations(CircleCropTransformation())
-                    }
+class CharacterAdapter() :
+    ListAdapter<Character, CharacterAdapter.RickAndMortyViewHolder>(diffUtil) {
+    inner class RickAndMortyViewHolder(private val binding: ItemCharacterBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun onBind(character: Character) = with(binding) {
+            characterName.text = character.name
+            characterLocation.text = character.location?.name
+            characterFirstSeen.text = character.origin?.name
+            imgCharacter.load(character.image) {
+                crossfade(true)
+            }
+            characterStatus.text = character.status
+            colorIndicator.setImageResource(
+                when {
+                    character.status?.contains("Dead") == true -> R.drawable.ic_circle_red
+                    character.status?.contains("Alive") == true -> R.drawable.ic_circle_green
+                    else -> R.drawable.ic_circle_grey
                 }
+            )
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RickAndMortyViewHolder {
+        return RickAndMortyViewHolder(
+            ItemCharacterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
+    }
+
+    override fun onBindViewHolder(holder: RickAndMortyViewHolder, position: Int) {
+        getItem(position).let {
+            holder.onBind(it)
+        }
+    }
+
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<Character>() {
+            override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(
+                oldItem: Character,
+                newItem: Character
+            ): Boolean {
+                return oldItem == newItem
             }
         }
     }
-
-    private val differCallback = object : DiffUtil.ItemCallback<Character>() {
-        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
-            return oldItem == newItem
-        }
-
-        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
-            return oldItem == newItem
-        }
-
-    }
-    val differ = AsyncListDiffer(this, differCallback)
 }

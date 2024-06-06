@@ -2,6 +2,9 @@ package com.geeks.rickandmortyy.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
+import com.geeks.rickandmortyy.CharacterDataSourceFactory
 import com.geeks.rickandmortyy.api.ApiService
 import com.geeks.rickandmortyy.data.model.BaseResponse
 import javax.inject.Inject
@@ -14,12 +17,16 @@ import retrofit2.Response
 class Repository @Inject constructor(
     private val api: ApiService
 ) {
-
-    fun getCharacters(): LiveData<Resource<List<Character>>> {
+    fun getCharacters(): MutableLiveData<Resource<List<Character>>> {
+//        val factory = CharacterDataSourceFactory(api)
+//        val config = PagedList.Config.Builder()
+//            .setEnablePlaceholders(false)
+//            .setPageSize(20)
+//            .build()
         val data = MutableLiveData<Resource<List<Character>>>()
 
         data.postValue(Resource.Loading())
-        api.getCharacters().enqueue(object : Callback<BaseResponse> {
+        api.getCharacters(page = 1).enqueue(object : Callback<BaseResponse> {
             override fun onResponse(call: Call<BaseResponse>, responce: Response<BaseResponse>) {
                 if (responce.isSuccessful && responce.body() != null) {
                     responce.body()?.let {
@@ -33,5 +40,6 @@ class Repository @Inject constructor(
             }
         })
         return data
+        //return LivePagedListBuilder(factory, config).build()
     }
 }
