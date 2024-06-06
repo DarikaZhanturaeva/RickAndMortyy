@@ -84,7 +84,7 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
     //paging
-    val paging_version = "3.3.0"
-    implementation("androidx.paging:paging-runtime:$paging_version")
+    val paging_version = "2.1.2"
+    implementation("androidx.paging:paging-runtime-ktx:$paging_version")
     testImplementation("androidx.paging:paging-common:$paging_version")
 }
