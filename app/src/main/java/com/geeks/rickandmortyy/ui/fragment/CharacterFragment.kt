@@ -13,9 +13,7 @@ import com.geeks.rickandmortyy.databinding.FragmentCharacterBinding
 import com.geeks.rickandmortyy.ui.CharacterViewModel
 import com.geeks.rickandmortyy.ui.adapter.CharacterAdapter
 import com.geeks.rickandmortyy.utils.Resource
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class CharacterFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterBinding
@@ -57,7 +55,7 @@ class CharacterFragment : Fragment() {
                 is Resource.Success -> {
                     binding.pgCharacter.visibility = View.GONE
                     binding.rvCharacter.visibility = View.VISIBLE
-                    resource.data.let { charactersAdapter.submitList(resource) }
+                    resource.data.let { charactersAdapter.submitList(it) }
                 }
 
                 is Resource.Error -> {

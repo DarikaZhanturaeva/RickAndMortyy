@@ -6,11 +6,8 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.geeks.rickandmortyy.data.Repository
 import com.geeks.rickandmortyy.data.model.Character
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
 
-@HiltViewModel
-class CharacterViewModel @Inject constructor(
+class CharacterViewModel (
     private val repository: Repository
 ):ViewModel() {
     fun getCharacters() = repository.getCharacters()

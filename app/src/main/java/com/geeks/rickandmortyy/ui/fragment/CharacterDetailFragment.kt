@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import com.geeks.rickandmortyy.R
 import com.geeks.rickandmortyy.databinding.FragmentCharacterDetailBinding
 import com.skydoves.expandablelayout.ExpandableLayout
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class CharacterDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterDetailBinding

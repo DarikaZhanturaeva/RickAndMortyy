@@ -5,7 +5,6 @@ import androidx.lifecycle.liveData
 import androidx.paging.DataSource
 import com.geeks.rickandmortyy.ui.paging.CharacterDataSourceFactory
 import com.geeks.rickandmortyy.api.ApiService
-import javax.inject.Inject
 import com.geeks.rickandmortyy.data.model.Character
 import com.geeks.rickandmortyy.utils.Resource
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +13,7 @@ import retrofit2.HttpException
 
 const val ARG_ERROR_MESSAGE = "Unknown Error"
 
-class Repository @Inject constructor(
+class Repository(
     private val api: ApiService
 ) {
     fun getCharacters(): LiveData<Resource<List<Character>>> {
