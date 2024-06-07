@@ -13,7 +13,7 @@ import com.geeks.rickandmortyy.R
 import com.geeks.rickandmortyy.databinding.ItemCharacterBinding
 
 class CharacterAdapter() :
-    ListAdapter<Character, CharacterAdapter.RickAndMortyViewHolder>(diffUtil) {
+    PagedListAdapter<Character, CharacterAdapter.RickAndMortyViewHolder>(diffUtil) {
     inner class RickAndMortyViewHolder(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(character: Character) = with(binding) {
@@ -49,7 +49,9 @@ class CharacterAdapter() :
 
     override fun onBindViewHolder(holder: RickAndMortyViewHolder, position: Int) {
         getItem(position).let {
-            holder.onBind(it)
+            if (it != null) {
+                holder.onBind(it)
+            }
         }
     }
 

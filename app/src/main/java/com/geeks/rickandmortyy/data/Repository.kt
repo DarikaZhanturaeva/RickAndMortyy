@@ -1,45 +1,39 @@
 package com.geeks.rickandmortyy.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.lifecycle.liveData
+import androidx.paging.DataSource
 import com.geeks.rickandmortyy.CharacterDataSourceFactory
 import com.geeks.rickandmortyy.api.ApiService
-import com.geeks.rickandmortyy.data.model.BaseResponse
 import javax.inject.Inject
 import com.geeks.rickandmortyy.data.model.Character
 import com.geeks.rickandmortyy.utils.Resource
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import kotlinx.coroutines.Dispatchers
+import okio.IOException
+import retrofit2.HttpException
+
+const val ARG_ERROR_MESSAGE = "Unknown Error"
 
 class Repository @Inject constructor(
     private val api: ApiService
 ) {
-    fun getCharacters(): MutableLiveData<Resource<List<Character>>> {
-//        val factory = CharacterDataSourceFactory(api)
-//        val config = PagedList.Config.Builder()
-//            .setEnablePlaceholders(false)
-//            .setPageSize(20)
-//            .build()
-        val data = MutableLiveData<Resource<List<Character>>>()
-
-        data.postValue(Resource.Loading())
-        api.getCharacters(page = 1).enqueue(object : Callback<BaseResponse> {
-            override fun onResponse(call: Call<BaseResponse>, responce: Response<BaseResponse>) {
-                if (responce.isSuccessful && responce.body() != null) {
-                    responce.body()?.let {
-                        data.postValue(Resource.Success(it.results))
+    fun getCharacters(): LiveData<Resource<List<Character>>> {
+        return liveData(Dispatchers.IO) {
+            try {
+                val response = api.getCharacters(page = 1)
+                if (response.isSuccessful && response.body() != null) {
+                    response.body()?.let {
+                        emit(Resource.Success(it.results))
                     }
                 }
+            } catch (e: IOException) {
+                emit(Resource.Error(e.localizedMessage ?: ARG_ERROR_MESSAGE))
+            } catch (e: HttpException) {
+                emit(Resource.Error(e.localizedMessage ?: ARG_ERROR_MESSAGE))
             }
-
-            override fun onFailure(call: Call<BaseResponse>, t: Throwable) {
-                data.postValue(Resource.Error(t.localizedMessage ?: "Unknown error"))
-            }
-        })
-        return data
-        //return LivePagedListBuilder(factory, config).build()
+        }
+    }
+    fun getCharactersDataSourceFactory(): DataSource.Factory<Int, Character> {
+        return CharacterDataSourceFactory(api)
     }
 }

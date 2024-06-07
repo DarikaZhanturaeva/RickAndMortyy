@@ -43,9 +43,10 @@ class CharacterFragment : Fragment() {
     }
 
     private fun setupObserve() {
-//        viewModel.characters.observe(viewLifecycleOwner, Observer<PagedList<Character>> {
-//            charactersAdapter.submitList(it)
-//
+        viewModel.characters.observe(viewLifecycleOwner, Observer<PagedList<Character>> {
+            charactersAdapter.submitList(it)
+        })
+
         viewModel.getCharacters().observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Loading -> {
@@ -56,7 +57,7 @@ class CharacterFragment : Fragment() {
                 is Resource.Success -> {
                     binding.pgCharacter.visibility = View.GONE
                     binding.rvCharacter.visibility = View.VISIBLE
-                    resource.data.let { charactersAdapter.submitList(it) }
+                    resource.data.let { charactersAdapter.submitList(resource) }
                 }
 
                 is Resource.Error -> {

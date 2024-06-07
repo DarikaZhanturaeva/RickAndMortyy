@@ -87,4 +87,12 @@ dependencies {
     val paging_version = "2.1.2"
     implementation("androidx.paging:paging-runtime-ktx:$paging_version")
     testImplementation("androidx.paging:paging-common:$paging_version")
+
+    //coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
+    //viewModel
+    val lifecycle_version = "2.8.1"
+    implementation("androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
 }
