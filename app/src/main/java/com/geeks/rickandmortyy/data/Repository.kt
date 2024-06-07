@@ -3,7 +3,7 @@ package com.geeks.rickandmortyy.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import androidx.paging.DataSource
-import com.geeks.rickandmortyy.CharacterDataSourceFactory
+import com.geeks.rickandmortyy.ui.paging.CharacterDataSourceFactory
 import com.geeks.rickandmortyy.api.ApiService
 import javax.inject.Inject
 import com.geeks.rickandmortyy.data.model.Character

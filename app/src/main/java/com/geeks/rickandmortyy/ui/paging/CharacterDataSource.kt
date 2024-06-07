@@ -1,4 +1,4 @@
-package com.geeks.rickandmortyy
+package com.geeks.rickandmortyy.ui.paging
 
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PageKeyedDataSource
