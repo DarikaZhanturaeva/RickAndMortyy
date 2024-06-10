@@ -1,9 +1,8 @@
-package com.geeks.rickandmortyy.data.model
-
+package com.geeks.rickandmortyy.data.model.detail
 
 import com.google.gson.annotations.SerializedName
 
-data class Origin(
+data class Location(
     @SerializedName("name")
     val name: String,
     @SerializedName("url")

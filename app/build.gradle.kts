@@ -77,10 +77,9 @@ dependencies {
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 
-    //paging
-    val paging_version = "2.1.2"
-    implementation("androidx.paging:paging-runtime-ktx:$paging_version")
-    testImplementation("androidx.paging:paging-common:$paging_version")
+    //paging3
+    val paging_version = "3.3.0"
+    implementation("androidx.paging:paging-runtime:$paging_version")
 
     //coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
@@ -91,6 +90,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:$lifecycle_version")
 
     //Koin
-    val koin_android_version = "3.5.6"
-    implementation("io.insert-koin:koin-android:$koin_android_version")
+    implementation("io.insert-koin:koin-android:3.5.6")
+    //implementation ("org.koin:koin-androidx-viewmodel:3.1.2")
 }

@@ -1,9 +1,8 @@
-package com.geeks.rickandmortyy.di
+package com.geeks.rickandmortyy.koin
 
-import androidx.lifecycle.ViewModel
-import com.geeks.rickandmortyy.api.ApiService
-import com.geeks.rickandmortyy.data.Repository
-import com.geeks.rickandmortyy.ui.CharacterViewModel
+import com.geeks.rickandmortyy.data.api.ApiService
+import com.geeks.rickandmortyy.data.repository.Repository
+import com.geeks.rickandmortyy.ui.characters.CharacterViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel

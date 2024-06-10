@@ -1,4 +1,4 @@
-package com.geeks.rickandmortyy.data.model
+package com.geeks.rickandmortyy.data.model.characters
 
 
 import com.google.gson.annotations.SerializedName

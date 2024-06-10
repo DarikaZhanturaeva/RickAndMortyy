@@ -2,18 +2,16 @@ package com.geeks.rickandmortyy.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import com.geeks.rickandmortyy.data.model.Character
+import com.geeks.rickandmortyy.data.model.characters.Character
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import coil.load
 import com.geeks.rickandmortyy.R
 import com.geeks.rickandmortyy.databinding.ItemCharacterBinding
 
 class CharacterAdapter() :
-    PagedListAdapter<Character, CharacterAdapter.RickAndMortyViewHolder>(diffUtil) {
+    PagingDataAdapter<Character, CharacterAdapter.RickAndMortyViewHolder>(diffUtil) {
     inner class RickAndMortyViewHolder(private val binding: ItemCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun onBind(character: Character) = with(binding) {

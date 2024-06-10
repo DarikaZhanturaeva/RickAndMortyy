@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/dark_gray"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.CharacterFragment">
+    tools:context=".ui.characters.CharacterFragment">
 
 <androidx.recyclerview.widget.RecyclerView
     android:layout_width="match_parent"

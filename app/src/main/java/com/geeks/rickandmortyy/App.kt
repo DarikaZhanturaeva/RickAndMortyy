@@ -1,7 +1,7 @@
 package com.geeks.rickandmortyy
 
 import android.app.Application
-import com.geeks.rickandmortyy.di.appModule
+import com.geeks.rickandmortyy.koin.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

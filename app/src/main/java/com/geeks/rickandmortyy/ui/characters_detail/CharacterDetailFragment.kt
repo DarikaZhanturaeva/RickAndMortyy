@@ -1,4 +1,4 @@
-package com.geeks.rickandmortyy.ui.fragment
+package com.geeks.rickandmortyy.ui.characters_detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
